@@ -1,0 +1,267 @@
+﻿<UserControl x:Class="Gold_Market.Views.Vendors"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Gold_Market.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1200"
+             xmlns:Lang="clr-namespace:Gold_Market"
+             xmlns:Controls="clr-namespace:Gold_Market.Controls"
+             >
+    <UserControl.DataContext>
+        <Lang:Languages/>
+    </UserControl.DataContext>
+    <Grid  Background="White">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition />
+                <RowDefinition Height="{StaticResource FooterHeight}"/>
+
+
+            </Grid.RowDefinitions>
+            <ToggleButton Click="ToggleButton_Click" FontFamily="Sound" IsChecked="{Binding VendorView}" Width="142" Height="30" Grid.Row="0" Style="{StaticResource StandardButtonToggle}" Content="{Binding Supplierbtn}" VerticalAlignment="Top" HorizontalAlignment="Left" />
+
+
+            <Border Margin="0" CornerRadius="3" Padding="5" Grid.Row="2" Style="{StaticResource ShadowBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+
+                    <Grid Grid.Row="0" Height="40" >
+                        <TextBox  x:Name="txtSearch" MinWidth="350" Tag="{Binding Clearlbl}" Style="{StaticResource SearchTextBox}" Uid="{Binding Searchlbl}" />
+
+
+
+
+
+
+
+
+
+                    </Grid>
+
+                    <ScrollViewer  Grid.Row="2">
+                        <ItemsControl  Grid.Row="1" Name="VendorListView" HorizontalContentAlignment="Stretch"   >
+                            <ItemsControl.Template>
+                                <ControlTemplate>
+                                    <Border >
+
+
+                                        <DockPanel LastChildFill="True" >
+
+                                            <Grid DockPanel.Dock="Top" Background="White">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                    <ColumnDefinition ></ColumnDefinition>
+                                                    <ColumnDefinition ></ColumnDefinition>
+                                                    <ColumnDefinition ></ColumnDefinition>
+
+
+                                                </Grid.ColumnDefinitions>
+                                                <Label  HorizontalContentAlignment="Center"  Grid.Column="0" Content="GUID"/>
+                                                <Label  HorizontalContentAlignment="Center"  Grid.Column="1" Content="اسم المورد"/>
+                                                <Label  HorizontalContentAlignment="Center"  Grid.Column="2" Content="رقم المورد"/>
+                                                <Label  HorizontalContentAlignment="Center"  Grid.Column="3" Content="ملاحظات"/>
+
+                                            </Grid>
+                                            <ItemsPresenter></ItemsPresenter>
+                                        </DockPanel>
+                                    </Border>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border >
+
+
+                                        <DockPanel LastChildFill="True" >
+
+                                            <Grid DockPanel.Dock="Top" Background="White">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                    <ColumnDefinition ></ColumnDefinition>
+                                                    <ColumnDefinition ></ColumnDefinition>
+                                                    <ColumnDefinition ></ColumnDefinition>
+
+
+                                                </Grid.ColumnDefinitions>
+                                                <Label  HorizontalContentAlignment="Center"  Grid.Column="0" Content="{Binding VendorID}"/>
+                                                <Label  HorizontalContentAlignment="Center"  Grid.Column="1" Content="{Binding VendorName}"/>
+                                                <Label  HorizontalContentAlignment="Center"  Grid.Column="2" Content="{Binding VendorNumber}"/>
+                                                <Label  HorizontalContentAlignment="Center"  Grid.Column="3" Content="{Binding Notes}"/>
+                                                <Button Name="DeleteVendor" Click="DeleteVendor_Click" CommandParameter="{Binding .}" Style="{StaticResource NullButton}" Content="Delete" Grid.ColumnSpan="4"/>
+
+
+
+
+                                            </Grid>
+                                            <ItemsPresenter></ItemsPresenter>
+                                        </DockPanel>
+                                    </Border>
+                                </DataTemplate>
+
+                            </ItemsControl.ItemTemplate>
+
+
+                        </ItemsControl>
+
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+
+
+        </Grid>
+
+
+
+        <Grid Visibility="{Binding ElementName=lblEdit,Path=Visibility}"  Background="Gray" Opacity=".4"/>
+
+        <Controls:CustomPopup IsOpen="{Binding VendorView}"  PopupAnimation="Slide" AllowsTransparency="True" Placement="Center"  MinWidth="350"  x:Name="popupFormsAdd" Margin="20"  >
+            <Border Style="{StaticResource ShadowBorder}" >
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnsFirstWidth}"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="{StaticResource ColumnsFirstWidth}"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="{StaticResource MainLabelHeight}"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition Height="20"/>
+
+
+                    </Grid.RowDefinitions>
+
+                    <Border Style="{StaticResource ShadowBorderHeader}"   Grid.ColumnSpan="19" Grid.RowSpan="2" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" FontSize="20" FontWeight="SemiBold"  Text="{Binding Supplierbtn}" Style="{StaticResource TextBlock TitleHomePage }" Visibility="{Binding ElementName=lblEdit,Path=Visibility,Converter={StaticResource VisibilityInverse}}"/>
+                    <TextBlock Visibility="Hidden" Name="lblEdit" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" FontSize="20" FontWeight="SemiBold"  Text="{Binding EditSupplierlbl}" Style="{StaticResource TextBlock TitleHomePage }" Margin="0,0,50,0"/>
+
+
+
+                    <ToggleButton Name="CloseView" Click="CloseView_Click" IsChecked="{Binding VendorView}"  VerticalAlignment="Center" Grid.Column="3" Grid.Row="1"   Content="X" Height="30" Width="30" HorizontalAlignment="Right" Style="{StaticResource StandardButtonToggle}" Margin="0,0,5,0" />
+
+
+
+
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="3">
+                        <Button Name="AddVendor" Click="AddVendor_Click" Content="{Binding Addbtn}" MinWidth="103" Height="30"  Style="{StaticResource StandardButton}"/>
+                    </StackPanel>
+
+
+
+
+                    <TextBlock Grid.Row="5" Grid.Column="1"  Text="{Binding VendorNamelbl}" Style="{StaticResource textblockEdit}"/>
+                    <TextBlock Grid.Row="7" Grid.Column="1"  Text="{Binding VendorNumberlbl}" Style="{StaticResource textblockEdit}"/>
+                    <TextBlock Grid.Row="9" Grid.Column="1"  Text="{Binding Noteslbl}" Style="{StaticResource textblockEdit}"/>
+
+
+                    <TextBox Grid.Row="5" Grid.Column="3" Name="VendorNamelbl"  Style="{StaticResource EntryNewWithHint}" Uid="{Binding VendorNamelbl}" />
+                    <TextBox Grid.Row="7" Grid.Column="3" Name="VendorNumberlbl"  Style="{StaticResource EntryNewWithHint}" Uid="{Binding VendorNumberlbl}" />
+                    <TextBox Grid.Row="9" Grid.Column="3" Name="Noteslbl"  Style="{StaticResource EntryNewWithHint}" Uid="{Binding Noteslbl}" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </Grid>
+
+
+
+
+
+            </Border>
+
+        </Controls:CustomPopup>
+
+
+
+        <Controls:CustomPopup x:Name="MeassageView"  PopupAnimation="Slide" AllowsTransparency="True" Placement="Center"  MinWidth="350"   Margin="20"  >
+            <Border Style="{StaticResource ShadowBorder}"  >
+
+
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource ColumnsFirstWidth}"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="{StaticResource UnitColumnWidth}"/>
+                        <ColumnDefinition Width="{StaticResource ColumnsFirstWidth}"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="{StaticResource MainLabelHeight}"/>
+                        <RowDefinition Height="20"/>
+
+                        <RowDefinition MinHeight="30"/>
+                        <RowDefinition Height="20"/>
+
+
+
+
+
+                    </Grid.RowDefinitions>
+
+                    <Border Style="{StaticResource ShadowBorderHeader}"   Grid.ColumnSpan="19" Grid.RowSpan="2" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" FontSize="20" FontWeight="SemiBold"  Text="{Binding NewCustomerlbl}" Style="{StaticResource TextBlock TitleHomePage }" />
+
+
+
+                    <ToggleButton Click="MessageClose_Click"  Name="MessageClose"  VerticalAlignment="Center" Grid.Column="3" Grid.Row="1"   Content="X" Height="30" Width="30" HorizontalAlignment="Right" Style="{StaticResource StandardButtonToggle}" Margin="0,0,5,0" />
+
+
+
+
+
+                    <TextBlock Name="txtMessage" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource textblockEdit}"/>
+
+
+
+
+
+                </Grid>
+
+
+
+
+
+            </Border>
+
+        </Controls:CustomPopup>
+
+
+    </Grid>
+</UserControl>
